@@ -2,6 +2,7 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.black.BishopBlack;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -25,10 +26,28 @@ public class Logic {
         boolean rst = false;
         int index = this.findBy(source);
         if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
+            Cell[] steps = new Cell[0];
+            try {
+                steps = this.figures[index].way(source, dest);
+            } catch (IllegalStateException ise) {
+                ise.getMessage();
+            }
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
+                if (figures[findBy(source)] instanceof BishopBlack) {
+                    int count = 0;
+                    for (Cell cell : steps) {
+                        if (findBy(cell) == -1) {
+                            count++;
+                        }
+                    }
+                    if (count == steps.length) {
+                        rst = true;
+                        this.figures[index] = this.figures[index].copy(dest);
+                    }
+                } else {
+                    rst = true;
+                    this.figures[index] = this.figures[index].copy(dest);
+                }
             }
         }
         return rst;
