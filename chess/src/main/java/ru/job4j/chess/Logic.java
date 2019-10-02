@@ -33,18 +33,14 @@ public class Logic {
                 ise.getMessage();
             }
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                if (figures[findBy(source)] instanceof BishopBlack) {
-                    int count = 0;
-                    for (Cell cell : steps) {
-                        if (findBy(cell) == -1) {
-                            count++;
-                        }
+                int count = 0;
+                for (Cell cell : steps) {
+                    if (findBy(cell) != -1) {
+                        break;
                     }
-                    if (count == steps.length) {
-                        rst = true;
-                        this.figures[index] = this.figures[index].copy(dest);
-                    }
-                } else {
+                    count++;
+                }
+                if (count == steps.length) {
                     rst = true;
                     this.figures[index] = this.figures[index].copy(dest);
                 }
