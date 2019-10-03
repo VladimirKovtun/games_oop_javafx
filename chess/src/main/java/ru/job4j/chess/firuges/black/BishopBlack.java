@@ -34,12 +34,7 @@ public class BishopBlack implements Figure {
         for (int index = 0; index < size; index++) {
             int x = source.x + deltaX * (index + 1);
             int y = source.y + deltaY * (index + 1);
-            for (Cell cell : Cell.values()) {
-                if (cell.x == x && cell.y == y) {
-                    steps[index] = cell;
-                    break;
-                }
-            }
+            steps[index] = Cell.findBy(x, y);
         }
         return steps;
     }
