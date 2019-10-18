@@ -26,6 +26,6 @@ public enum Cell {
                 break;
             }
         }
-        return rst;
+        return Cell.values()[x * 8 + y];
     }
 }

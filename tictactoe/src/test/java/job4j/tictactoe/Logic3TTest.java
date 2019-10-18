@@ -66,14 +66,14 @@ public class Logic3TTest {
     }
 
     @Test
-    public void whenHasOWinner() {
+    public void whenHasONotWinner() {
         Figure3T[][] table = {
                 {new Figure3T(true, false), new Figure3T(), new Figure3T()},
                 {new Figure3T(true, false), new Figure3T(true, false), new Figure3T()},
                 {new Figure3T(true, false), new Figure3T(), new Figure3T(true, false)},
         };
         Logic3T login = new Logic3T(table);
-        assertThat(login.isWinnerO(), is(true));
+        assertThat(login.isWinnerO(), is(false));
     }
 
     @Test
